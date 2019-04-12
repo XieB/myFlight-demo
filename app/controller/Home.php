@@ -42,7 +42,7 @@ class Home
 
     public static function collection() {
         $request = Flight::request()->data->getData();
-        (new \validator\Home())->setData($request)->collection();
+//        (new \validator\Home())->setData($request)->collection();
 
         $res = (new \model\Home())->collection($request);
         if ($res) {
