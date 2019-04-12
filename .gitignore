@@ -1,0 +1,7 @@
+.temp/
+.rn_temp/
+.DS_Store
+.vscode
+.idea
+.git
+vendor/
