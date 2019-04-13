@@ -51,5 +51,12 @@ class Home
             Send::error('提交失败');
         }
     }
+
+    public static function log() {
+        $request = Flight::request()->query->getData();
+
+        $res = (new \model\Home())->getLogList($request);
+        Send::success($res);
+    }
 }
 

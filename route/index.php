@@ -9,3 +9,4 @@ Flight::route('GET|POST /vali', array('controller\Home','validator'));
 Flight::route('GET|POST /load', array('controller\Home','load'));
 
 Flight::route('GET|POST /collection', array('controller\Home','collection'));
+Flight::route('GET /log', array('controller\Home','log'));
