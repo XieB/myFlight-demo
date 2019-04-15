@@ -23,4 +23,10 @@ class Vote
     {
         (new \model\Vote())->setList();
     }
+
+    public static function logList() {
+        $request = Flight::request()->query->getData();
+        $res = (new \model\VoteLog())->getList($request);
+        Send::success($res);
+    }
 }

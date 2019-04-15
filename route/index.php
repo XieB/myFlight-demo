@@ -12,3 +12,5 @@ Flight::route('GET|POST /collection', array('controller\Home','collection'));
 Flight::route('GET /log', array('controller\Home','log'));
 
 Flight::route('GET /vote/list', array('controller\Vote','getList'));
+Flight::route('GET /vote/log', array('controller\Vote','logList'));
+Flight::route('GET /wechat/code', array('controller\Wechat','code'));
