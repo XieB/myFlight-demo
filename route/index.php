@@ -10,3 +10,5 @@ Flight::route('GET|POST /load', array('controller\Home','load'));
 
 Flight::route('GET|POST /collection', array('controller\Home','collection'));
 Flight::route('GET /log', array('controller\Home','log'));
+
+Flight::route('GET /vote/list', array('controller\Vote','getList'));

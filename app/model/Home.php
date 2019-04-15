@@ -14,8 +14,10 @@ class Home {
     }
 
     public function getLogList($data) {
-        $rows = $data['list_rows'];
-        $start = ($data['page'] - 1) * $rows;
+        $page = $data['page'] ?? 1;
+        $listRows = $data['list_rows'] ?? 15;
+        $rows = $listRows;
+        $start = ($page - 1) * $rows;
         $count = Flight::db()->count($this->table);
         $data = Flight::db()->select($this->table, "*", [
             'ORDER' => [
