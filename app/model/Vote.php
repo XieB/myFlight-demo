@@ -38,16 +38,7 @@ class Vote
         $res = Flight::db()->select($this->table, "*", [
             'LIMIT' => [$start, $rows]
         ]);
-        $data = [];
-        $dir = '/static/images/logo/';
-        $domain = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
-        foreach ($res as $k => $item) {
-            $data[$k] = $item;
-            $data[$k]['img1'] = $domain . $dir . $item['img1'];
-            if (!empty($item['img2'])) {
-                $data[$k]['img2'] = $domain . $dir . $item['img2'];
-            }
-        }
+        $data = \common\Vote::imgDeal($res);
 
         return [
             'data' => $data,

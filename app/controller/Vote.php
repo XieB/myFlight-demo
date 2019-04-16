@@ -29,4 +29,29 @@ class Vote
         $res = (new \model\VoteLog())->getList($request);
         Send::success($res);
     }
+
+    public static function add() {
+        $request = Flight::request()->data->getData();
+
+        (new \validator\Vote())->setData($request)->add();
+
+        $voteModel = new \model\VoteLog();
+        $num = $voteModel->check($request);
+        if (!$num) {
+            Send::error('已提交，无法重复投票');
+        }
+        $res = $voteModel->add($request);
+        if ($res->rowCount()) {
+            Send::success();
+        } else {
+            Send::error('投票失败');
+        }
+    }
+
+    public static function check() {
+        $request = Flight::request()->data->getData();
+        (new \validator\Vote())->setData($request)->checkVote();
+        $num = (new \model\VoteLog())->check($request);
+        Send::success(['num' => $num]);
+    }
 }

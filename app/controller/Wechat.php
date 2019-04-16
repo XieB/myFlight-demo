@@ -7,20 +7,22 @@
  */
 
 namespace controller;
+use common\Send;
 use Flight;
 
-class Wchat
+class Wechat
 {
     public static function code() {
         $request = Flight::request()->query->getData();
         $res = (new \common\Wechat())->code($request['code']);
-        $error = empty($res['errcode']);
-        if (empty($error)) {
+        $res = json_decode($res);
+        $errorCode = isset($res->errcode) ? $res->errcode : false;
+        if (!$errorCode) {
             Send::success([
-                'token' => $res['access_token']
+                'token' => $res->openid
             ]);
         } else {
-            Send::error('微信返回错误，错误码' . $error);
+            Send::error('微信返回错误，错误码' . $res->errcode);
         }
     }
 }
