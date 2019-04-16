@@ -37,7 +37,7 @@ class Vote
 
         $voteModel = new \model\VoteLog();
         $num = $voteModel->check($request);
-        if (!$num) {
+        if ($num) {
             Send::error('已提交，无法重复投票');
         }
         $res = $voteModel->add($request);
