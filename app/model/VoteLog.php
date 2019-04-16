@@ -21,6 +21,7 @@ class VoteLog
         $res = Flight::db()->select($this->table, [
             "[>]vote_images" => ["vote_id" => "id"],
         ],[
+            'vote_images.desc',
             'vote_images.id',
             'vote_images.img1',
             'vote_images.img2',
