@@ -73,11 +73,11 @@ class Innovation
                     ],
                 ]);
 
-                $data[$k]['score'] = ($v['sum'] - $maxScore - $minScore) / ($count - 2);
+                $data[$k]['score'] = round(($v['sum'] - $maxScore - $minScore) / ($count - 2), 2);
             }
         }
 
-        return self::arraySort($data, 'score');
+        return self::arraySequence($data, 'score');
     }
 
     public function add($data) {
@@ -99,17 +99,14 @@ class Innovation
         return $res;
     }
 
-    private static function arraySort($arr, $keys, $type = 'desc') {
-        $keysvalue = $new_array = [];
-        foreach ($arr as $k => $v){
-            $keysvalue[$k] = $v[$keys];
+    private static function arraySequence($array, $field, $sort = 'SORT_DESC'){
+        $arrSort = array();
+        foreach ($array as $uniqid => $row) {
+            foreach ($row as $key => $value) {
+                $arrSort[$key][$uniqid] = $value;
+            }
         }
-
-        $type == 'asc'?asort($keysvalue):arsort($keysvalue);
-
-        foreach ($keysvalue as $k => $v) {
-            $new_array[$k] = $arr[$k];
-        }
-        return $new_array;
+        array_multisort($arrSort[$field], constant($sort), $array);
+        return $array;
     }
 }

@@ -20,10 +20,16 @@ class Innovation
 
     public static function add() { //打分
         $request = Flight::request()->data->getData();
+        $newId = $request['new_id'];
+        $info = (new \model\Innovation())->info($newId);
+        if ($info['state'] === 0) {
+            Send::error('该提案已结束打分');
+        }
         (new \validator\Innovation())->setData($request)->add();
 
         $inModel = new \model\Innovation();
         $num = $inModel->check($request);
+
         if ($num) {
             Send::error('已提交，无法重复打分');
         }
