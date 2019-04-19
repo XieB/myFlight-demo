@@ -22,7 +22,7 @@ class Innovation
         $request = Flight::request()->data->getData();
         $newId = $request['new_id'];
         $info = (new \model\Innovation())->info($newId);
-        if ($info['state'] === 0) {
+        if (!$info['state']) {
             Send::error('该提案已结束打分');
         }
         (new \validator\Innovation())->setData($request)->add();
