@@ -31,7 +31,7 @@ class Vote
     public function getList($data)
     {
         $page = $data['page'] ?? 1;
-        $listRows = $data['list_rows'] ?? 150;
+        $listRows = $data['list_rows'] ?? 15;
         $rows = $listRows;
         $start = ($page - 1) * $rows;
         $count = Flight::db()->count($this->table);
